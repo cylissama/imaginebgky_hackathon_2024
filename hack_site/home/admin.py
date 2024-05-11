@@ -9,5 +9,4 @@ admin.site.register(Category)
 admin.site.register(Vendor)
 from .models import Complaint, PointOfInterest
 
-admin.site.register(Complaint)
 admin.site.register(PointOfInterest)
