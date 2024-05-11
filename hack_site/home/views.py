@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
-from .models import Complaint 
+from .models import Complaint, PointOfInterest
 from .forms import *
+from .serializers import PointOfInterestSerializer
+from rest_framework import viewsets
 
 def home_view(request):
     return render(request, 'home/index.html')
@@ -23,4 +25,14 @@ def complaint_view(request):
     context['form'] = form
 
     return render(request, template, context)
-    
+
+
+class PointOfInterestViewSet(viewsets.ModelViewSet):
+    queryset = PointOfInterest.objects.all()
+    serializer_class = PointOfInterestSerializer
+
+def map_view(request):
+    data = PointOfInterest.objects.all()
+    context = {}
+    context['data'] = data
+    return render(request, 'home/map.html', context)    
