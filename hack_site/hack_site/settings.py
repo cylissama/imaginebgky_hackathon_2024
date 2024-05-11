@@ -37,8 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'home.apps.HomeConfig'
+    'home.apps.HomeConfig',
+    'easy_maps',
 ]
+
+EASY_MAPS_GOOGLE_KEY = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ___0123456789'
+EASY_MAPS_CENTER = (-41.3, 32)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
