@@ -33,3 +33,11 @@ class PointOfInterest(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Pass(models.Model):
+    name = models.CharField(max_length=100)
+    county = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.name} ({self.county})"
+

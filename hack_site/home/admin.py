@@ -10,3 +10,4 @@ admin.site.register(Vendor)
 from .models import Complaint, PointOfInterest
 
 admin.site.register(PointOfInterest)
+admin.site.register(Pass)
