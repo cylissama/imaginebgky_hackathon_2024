@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 {% include 'home/header.html' %}
+<style>
+    .gradient {
+        background-color: #F0F0F0;
+        /* background-image: linear-gradient(180deg, #ffffff 0%, #abf774 100%); */
+    }
+</style>
 
-<body>
+<body class="gradient">
     <div class="container">
         {% block content %}
         

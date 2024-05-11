@@ -9,3 +9,18 @@ class Complaint(models.Model):
 
     def __str__(self):
         return f"Complaint by {self.filer_name}"
+    
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+class Vendor(models.Model):
+    name = models.CharField(max_length=255)
+    categories = models.ManyToManyField(Category)
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=15)
+
+    def __str__(self):
+        return self.name

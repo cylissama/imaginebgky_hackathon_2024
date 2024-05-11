@@ -1,9 +1,13 @@
 from django.shortcuts import render, redirect
-from .models import Complaint 
+from .models import * 
 from .forms import *
 
 def home_view(request):
-    return render(request, 'home/index.html')
+    template = 'home/index.html'
+    context = {}
+    vendors = Vendor.objects.all()
+    context['vendors'] = vendors
+    return render(request, template, context)
 
 def complaint_view(request):
     template = 'home/complaints.html'
@@ -24,3 +28,19 @@ def complaint_view(request):
 
     return render(request, template, context)
     
+def add_vendor_view(request):
+    template = 'home/add_vendors.html'
+    context = {}
+    form = VendorForm()
+
+    if request.method == 'POST':
+        form = VendorForm(request.POST)
+    if form.is_valid():
+        form.save()
+        return redirect('vendor')  # Redirect to a new URL after posting
+    else:
+        form = VendorForm()  # An empty form instance for GET request
+
+    context['form'] = form
+
+    return render(request, template, context)
