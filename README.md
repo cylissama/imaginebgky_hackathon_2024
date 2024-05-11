@@ -1,6 +1,10 @@
 # hackathon
 
-Requirements - 
+This hackathon project with IMAGINE_BGKY focuses on future plans for an improved infrastructure, focused around a rail/subway system. It utilizes Django, a Python web framework to accomplish this feat with a map that can show the destinations and routes of these potential rail systems. There are also forms that allow for anonymous complaints and a way to obtain passes for this system.
+
+Python Version - 3.12.3
+
+Python Environment Requirements - 
 ```
 asgiref==3.8.1
 Django==5.0.6
