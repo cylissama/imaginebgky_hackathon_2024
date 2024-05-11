@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>Create a New Complaint</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+    
+    <h1>Complaints List</h1>
+    <ul>
+        {% for complaint in complaints %}
+            <li>
+                <strong>Name:</strong> {{ complaint.filer_name }}<br>
+                <strong>Email:</strong> {{ complaint.email_address }}<br>
+                <strong>Phone:</strong> {{ complaint.phone_number }}<br>
+                <strong>Reason:</strong> {{ complaint.reason_for_complaint }}
+            </li>
+        {% empty %}
+            <li>No complaints found.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
