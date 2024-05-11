@@ -17,8 +17,8 @@
     </style>
 </head>
 
-<div class="card shadow" style="border-radius: 20px;"">
-<body style="">
+<div class="card shadow" style="border-radius: 20px;">
+<body>
     <h1 style="text-align: center; margin-top: 10px; margin-bottom: 10px;">Map of Bowling Green, KY</h1>
     <div id="map"></div>
     <script>
@@ -28,13 +28,38 @@
             maxZoom: 19,
         }).addTo(map);
 
+        // Array to store LatLng pairs
+        var latLngs = [];
+
+        // Fetch points of interest from the API
         fetch('/api/points-of-interest/')
             .then(response => response.json())
-            .then(data => {
-                data.forEach(point => {
-                    L.marker([point.latitude, point.longitude])
+            .then(pointsOfInterest => {
+                pointsOfInterest.forEach(point => {
+                    var latLng = [point.latitude, point.longitude];
+                    latLngs.push(latLng);  // Add coordinates to latLngs array
+                    L.marker(latLng)
                         .addTo(map)
                         .bindPopup(`<b>${point.name}</b><br>${point.description}`);
+                });
+
+                // Optional: Adjust the map view to fit all points
+                if (latLngs.length > 0) {
+                    map.fitBounds(latLngs);
+                }
+            });
+
+        // Fetch routes from the API
+        fetch('/api/routes/')
+            .then(response => response.json())
+            .then(routes => {
+                routes.forEach(route => {
+                    var routeLatLngs = route.points.map(point => [point.latitude, point.longitude]);
+                    L.polyline(routeLatLngs, {
+                        color: route.color,  // Use the route's color
+                        weight: 5,
+                        opacity: 0.7
+                    }).addTo(map);
                 });
             });
     </script>

@@ -4,6 +4,8 @@ from .views import *
 
 router = DefaultRouter()
 router.register(r'points-of-interest', PointOfInterestViewSet)
+router.register(r'routes', RouteViewSet)
+
 
 urlpatterns = [
     path('', home_view, name='home'),
