@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import * 
 from .forms import *
-from .serializers import PointOfInterestSerializer
+from .serializers import PointOfInterestSerializer, RouteSerializer
 from rest_framework import viewsets
 
 def home_view(request):
@@ -52,8 +52,21 @@ class PointOfInterestViewSet(viewsets.ModelViewSet):
     queryset = PointOfInterest.objects.all()
     serializer_class = PointOfInterestSerializer
 
+    
+class RouteViewSet(viewsets.ModelViewSet):
+    queryset = Route.objects.all()
+    serializer_class = RouteSerializer
+
 def map_view(request):
-    return render(request, 'home/map.html')    
+    points_of_interest = PointOfInterest.objects.all()
+    routes = Route.objects.all()
+    points_serializer = PointOfInterestSerializer(points_of_interest, many=True)
+    routes_serializer = RouteSerializer(routes, many=True)
+    context = {
+        'points_data': points_serializer.data,
+        'routes_data': routes_serializer.data
+    }
+    return render(request, 'home/map.html', context)  
 
 def pass_view(request):
     template = 'home/new_pass.html'

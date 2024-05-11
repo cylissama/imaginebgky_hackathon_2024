@@ -40,4 +40,12 @@ class Pass(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.county})"
+    
+class Route(models.Model):
+    name = models.CharField(max_length=100)
+    color = models.CharField(max_length=7, help_text="Hex color code for the route")
+    points = models.ManyToManyField(PointOfInterest, related_name='routes')
+
+    def __str__(self):
+        return self.name
 

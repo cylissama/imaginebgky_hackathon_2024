@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import *
+from .models import Complaint, PointOfInterest
 
 @admin.register(Complaint)
 class ComplaintAdmin(admin.ModelAdmin):
@@ -7,7 +8,6 @@ class ComplaintAdmin(admin.ModelAdmin):
 
 admin.site.register(Category)
 admin.site.register(Vendor)
-from .models import Complaint, PointOfInterest
-
 admin.site.register(PointOfInterest)
 admin.site.register(Pass)
+admin.site.register(Route)
