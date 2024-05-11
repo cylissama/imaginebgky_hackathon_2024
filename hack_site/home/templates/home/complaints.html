@@ -1,9 +1,26 @@
 {% extends 'home/base.html' %}
 {% block content %}
 <h1>Create a New Complaint</h1>
-<form method="post">
+<form method="post" class="form">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
+    <div class="form-group">
+        <label for="id_filer_name">Name:</label>
+        <input type="text" name="filer_name" id="id_filer_name" class="form-control" value="{{ form.filer_name.value|default_if_none:'' }}" required>
+    </div>
+    <div class="form-group">
+        <label for="id_email_address">Email:</label>
+        <input type="email" name="email_address" id="id_email_address" class="form-control" value="{{ form.email_address.value|default_if_none:'' }}" required>
+    </div>
+    <div class="form-group">
+        <label for="id_phone_number">Phone Number:</label>
+        <input type="text" name="phone_number" id="id_phone_number" class="form-control" value="{{ form.phone_number.value|default_if_none:'' }}" required>
+    </div>
+    <div class="form-group">
+        <label for="id_reason_for_complaint">Reason for Complaint:</label>
+        <textarea name="reason_for_complaint" id="id_reason_for_complaint" class="form-control" required>{{ form.reason_for_complaint.value|default_if_none:'' }}</textarea>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
 {% endblock %}
