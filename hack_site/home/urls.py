@@ -10,6 +10,7 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('complaints/', complaint_view, name="complaints"),
     path('map/', map_view, name='map_view'),
+    path('pass/', pass_view, name='pass_view')
 ]
 
 

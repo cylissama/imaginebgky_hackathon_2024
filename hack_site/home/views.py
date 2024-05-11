@@ -54,3 +54,23 @@ class PointOfInterestViewSet(viewsets.ModelViewSet):
 
 def map_view(request):
     return render(request, 'home/map.html')    
+
+def pass_view(request):
+    template = 'home/new_pass.html'
+    context = {}
+    passes = Pass.objects.all()
+    context['passes'] = passes
+
+    form = PassForm()
+
+    if request.method == 'POST':
+        form = PassForm(request.POST)
+    if form.is_valid():
+        form.save()
+        return redirect('pass_view')  # Redirect to a new URL after posting
+    else:
+        form = PassForm()
+
+    context['form'] = form
+    
+    return render(request, template, context)
