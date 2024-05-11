@@ -32,7 +32,4 @@ class PointOfInterestViewSet(viewsets.ModelViewSet):
     serializer_class = PointOfInterestSerializer
 
 def map_view(request):
-    data = PointOfInterest.objects.all()
-    context = {}
-    context['data'] = data
-    return render(request, 'home/map.html', context)    
+    return render(request, 'home/map.html')    
