@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import * 
 from .forms import *
+from .serializers import PointOfInterestSerializer
+from rest_framework import viewsets
 
 def home_view(request):
     template = 'home/index.html'
@@ -44,3 +46,11 @@ def add_vendor_view(request):
     context['form'] = form
 
     return render(request, template, context)
+
+
+class PointOfInterestViewSet(viewsets.ModelViewSet):
+    queryset = PointOfInterest.objects.all()
+    serializer_class = PointOfInterestSerializer
+
+def map_view(request):
+    return render(request, 'home/map.html')    
